@@ -1,0 +1,26 @@
+<div class="d-flex flex-column w-100 align-items-center">
+<div class="d-flex">
+<h3 class="m-4">Users</h3>
+</div>
+<div class="d-flex flex-row  gap-3 w-50 mb-4 justify-content-start">
+<input type="text" [value]="searchValue" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" (input)="onInput($event)" />
+
+<button class="btn btn-success w-40" *ngIf="!isSorted" (click)="onSortClick()">Sort</button>
+<button class="btn btn-success w-40" *ngIf="isSorted" (click)="onSortClick()">Cancel Sort</button>
+</div>
+
+
+  <div class="w-90 d-flex flex-wrap gap-2 mb-4 align-items-center" *ngIf="counter > 0">
+    <app-user
+    *ngFor="let user of searchValue ? usersService.searchResult : usersService.sortedUsers"
+    [user]="user"
+  ></app-user>
+
+  </div>
+
+  <div class="w-90 d-flex flex-wrap gap-2 mb-4 align-items-center" *ngIf="!isSorted" class="d-flex flex-row flex-wrap gap-1 align-items-center">
+    <app-user *ngFor="let user of searchValue ? usersService.searchResult : usersService.users"
+    [user]="user"></app-user>
+  </div>
+
+
